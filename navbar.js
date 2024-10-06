@@ -9,3 +9,4 @@ const menu = `
 `;
 
 document.body.insertAdjacentHTML('afterbegin', menu);
+
