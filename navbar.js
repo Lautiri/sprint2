@@ -1,4 +1,4 @@
-const categorias = ['remeras', 'pantalones', 'gorras'];
+const categorias = ['autos', 'superautos', 'mechaautos'];
 
 const menu = `
   <nav>
