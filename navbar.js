@@ -1,12 +1,15 @@
-const categorias = ['autos', 'superautos', 'mechaautos'];
+const categorias = [
+  { nombre: 'autos' },
+  { nombre: 'superautos' },
+  { nombre: 'mechaautos' }
+];
 
 const menu = `
-  <nav>
-    <ul>
-      ${categorias.map(categoria => `<li><a href="#">${categoria}</a></li>`).join('')}
+  <nav class="navbar navbar-expand-lg">
+    <ul class="navbar-nav">
+      ${categorias.map(categoria => `<li class="nav-item"><a class="nav-link" href="categoria.html?cat=${categoria.nombre}">${categoria.nombre}</a></li>`).join('')}
     </ul>
   </nav>
 `;
 
-document.body.insertAdjacentHTML('afterbegin', menu);
-
+document.querySelector('header').innerHTML += menu;

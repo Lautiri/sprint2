@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Producto</title>
+    <title>Categorías - Futuro Ecommerce</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -13,8 +14,15 @@
                 <a class="navbar-brand" href="index.html">Autos</a>
                 <div>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item d-flex">
-                            <script src="navbar.js"></script>
+                        <li class="nav-item">
+                            <a class="nav-link" href="categoria.html?cat=autos">Autos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="categoria.html?cat=superautos">Superautos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="categoria.html?cat=mechaautos">Mechaautos</a>
+                        
                         </li>
                     </ul>
                 </div>
@@ -22,11 +30,12 @@
         </nav>
     </header>
 
-    <main>
+    <section class="container mt-4">
+        <div id="productos" class="row">
+        </div>
+    </section>
 
-    </main>
-
-    <script src="producto.js"></script>
+    <script src="categoria.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

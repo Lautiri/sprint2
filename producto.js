@@ -5,7 +5,7 @@ const data = [
     "detail": "Deportivo clásico con motor V8 de alto rendimiento y diseño icónico.",
     "price": 55000,
     "stock": 1,
-    "img": "https://cdn.motor1.com/images/mgl/x60VP/s1/lanzamiento-ford-mustang-2020.jpg"
+    "img": "https://www.pngitem.com/pimgs/m/340-3402493_ford-mustang-gt-5-0-2019-hd-png-download.png"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@ const data = [
     "detail": "Sedán eléctrico con autonomía líder en su clase y tecnología avanzada.",
     "price": 79999,
     "stock": 1,
-    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxlVxWW8NjhW5c5sefL5ua-_LIEz3Lih1B7A&s"
+    "img": "https://teslize.com/wp-content/uploads/2023/10/GUID-5543BA62-932F-46C5-B1EF-44707D4726B2-online-en-US.png"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@ const data = [
     "detail": "Muscle car potente con motor V8 sobrealimentado y estilo agresivo.",
     "price": 63000,
     "stock": 1,
-    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxlVxWW8NjhW5c5sefL5ua-_LIEz3Lih1B7A&s"
+    "img": "https://i.pinimg.com/originals/36/7d/e6/367de641ffa6cd6c8ce806b0365ceea2.png"
   },
   {
     "id": 4,
@@ -37,7 +37,7 @@ const data = [
     "detail": "Ícono de los deportivos con un manejo preciso y diseño atemporal.",
     "price": 100000,
     "stock": 1,
-    "img": "https://cdn.motor1.com/images/mgl/Oo0PRY/s3/0840_nevada_coupe_u-crane_akos0607_edit_v03-cielo.jpg"
+    "img": "https://autofichas.com.ar/wp-content/uploads/2024/01/porsche-911-carrera-4s-3.0l-aut-2024.jpg"
   },
   {
     "id": 6,
@@ -45,7 +45,7 @@ const data = [
     "detail": "Superdeportivo con motor V10 y tracción integral Quattro.",
     "price": 145000,
     "stock": 1,
-    "img": "https://www.vepersa.audi.es/content/dam/iph/international/es/general_assets/blueprint/master/models/r8/r8-spyder-v10-performance-rwd/stage/header-audi-r8-spyder-performance-v10-rwd-1400x438.jpg/_jcr_content/renditions/cq5dam.thumbnail.640.360.iph.hero.png?imwidth=320&imdensity=1"
+    "img": "https://acnews.blob.core.windows.net/imgnews/large/0_4153240824.jpg"
   },
   {
     "id": 7,
@@ -53,7 +53,7 @@ const data = [
     "detail": "Máquina de velocidad extrema con un diseño impresionante.",
     "price": 230000,
     "stock": 1,
-    "img": "https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/model_detail/huracan/tecnica/2023/11_06_refresh/s/ext_02.jpg"
+    "img": "https://img.freepik.com/fotos-premium/lamborghini-huracan-primer-plano-aislado-fondo-blanco-lujo-premium-velocidad-realista-3d_741269-65.jpg"
   },
   {
     "id": 8,
@@ -61,7 +61,7 @@ const data = [
     "detail": "Deportivo italiano con motor V8 biturbo y aerodinámica avanzada.",
     "price": 330000,
     "stock": 1,
-    "img": "https://www.drivercarsbcn.com/wp-content/uploads/2022/03/IMG_1197-min-scaled.jpg"
+    "img": "https://content.api.news/v3/images/bin/7c3da6bbe5409bc0281fc5a8173fd634"
   },
   {
     "id": 9,
@@ -69,9 +69,20 @@ const data = [
     "detail": "Superdeportivo británico con rendimiento de pista y lujo.",
     "price": 299999,
     "stock": 1,
-    "img": "https://mclaren.scene7.com/is/image/mclaren/720S-Coupe_hero:crop-16x9?wid=1920&hei=1080"
+    "img": "https://wallpapers.com/images/hd/best-mclaren-720s-background-m968efujbkxgkq3m.jpg"
   }
 ];
+
+const autos = data.sort((a, b) => a.price - b.price).slice(0, 3);
+
+const superautos = data.sort((a, b) => b.id - a.id).slice(0, 3);
+
+const mechaautos = data.filter(auto => !autos.includes(auto) && !superautos.includes(auto));
+
+console.log("Autos:", autos);
+console.log("Superautos:", superautos);
+console.log("Mechaautos:", mechaautos);
+
 
 class Producto {
   constructor(titulo, detalle, precio, stock, imagen) {
@@ -95,14 +106,24 @@ class Producto {
   }
 }
 
-function mostrarProductos() {
-  const productosHTML = data.map(producto => {
-    const { title, detail, price, stock, img } = producto;
-    const productoObj = new Producto(title, detail, price, stock, img);
-    return productoObj.generarHTML();
-  }).join('');
+function mostrarProducto() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get('prod');
+  const productoSeleccionado = data.find(producto => producto.id == productId);
 
-  document.querySelector('main').innerHTML = productosHTML;
+  if (productoSeleccionado) {
+    const productoObj = new Producto(
+      productoSeleccionado.title,
+      productoSeleccionado.detail,
+      productoSeleccionado.price,
+      productoSeleccionado.stock,
+      productoSeleccionado.img
+    );
+    
+    document.querySelector('main').innerHTML = productoObj.generarHTML();
+  } else {
+    document.querySelector('main').innerHTML = "<p>Producto no encontrado.</p>";
+  }
 }
 
-mostrarProductos();
+mostrarProducto()
