@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <script src="isAuthRedirectHome.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+   href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+   rel="stylesheet"
+   integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+   crossorigin="anonymous"
+  />
+  <style>
+   body {
+    display: grid;
+    place-items: center;
+    height: 100dvh;
+    background-image: url('./wallpaper.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+   }
+  </style>
+  <title>Document</title>
+ </head>
+ <body id="login">
+  <form>
+   <div class="mb-3">
+    <label class="form-label">Email address</label>
+    <input type="email" class="form-control" name="email" />
+   </div>
+   <div class="mb-3">
+    <label class="form-label">Password</label>
+    <input type="password" class="form-control" name="password" />
+   </div>
+   <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <script>
+    const tarjet = {email: "laucharip@gmail.com", password: "vilgax"};
+    let form = document.querySelector("form");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (tarjet.email === form.elements.email.value && tarjet.password === form.elements.password.value) {
+            localStorage.setItem("email", form.elements.email.value);
+            location.href = "./index.html";
+        } else {
+            alert("usuario o contraseña incorrecto");
+            form.elements.email.value = "";
+            form.elements.password.value = "";
+        }
+     });
+  </script>
+ </body>
+</html>
