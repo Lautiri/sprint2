@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Producto</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-custom {
+          border-radius: 50%;
+          background-color: #213cb8;
+          color: white;
+          width: 40px;
+          height: 40px;
+        }
+        .counter-input {
+          width: 100px;
+          text-align: center;
+          border: none;
+        }
+      </style>
 </head>
 <body>
     <header>
@@ -30,5 +44,16 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('btn-minus').addEventListener('click', function() {
+          const counter = document.getElementById('counter');
+          counter.value = Math.max(0, parseInt(counter.value) - 1);
+        });
+      
+        document.getElementById('btn-plus').addEventListener('click', function() {
+          const counter = document.getElementById('counter');
+          counter.value = parseInt(counter.value) + 1;
+        });
+      </script>
 </body>
 </html>

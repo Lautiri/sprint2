@@ -101,6 +101,22 @@ class Producto {
         <p>${this.detalle}</p>
         <p>Precio: $${this.precio}</p>
         <p>Stock disponible: ${this.stock}</p>
+        ${
+      localStorage.getItem("email")
+        ? `<span><div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="input-group d-flex align-items-center justify-content-center">
+        <button class="btn btn-custom" type="button" id="btn-minus">-</button>
+        <input type="text" id="counter" class="counter-input mx-3" value="0" readonly>
+        <button class="btn btn-custom" type="button" id="btn-plus">+</button>
+      </div>
+    </div>
+  </div>
+</div>
+</span>` 
+: `<button class='btn btn-success'><a href='login.html' style='color: inherit; text-decoration: none; cursor: default;'>Iniciar sesión para comprar</a></button>`
+    }
       </div>
     `;
   }
