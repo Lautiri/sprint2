@@ -4,7 +4,7 @@ const data = [
     "title": "Ford Mustang GT",
     "detail": "Deportivo clásico con motor V8 de alto rendimiento y diseño icónico.",
     "price": 55000,
-    "stock": 1,
+    "stock": 4,
     "img": "https://www.pngitem.com/pimgs/m/340-3402493_ford-mustang-gt-5-0-2019-hd-png-download.png"
   },
   {
@@ -12,7 +12,7 @@ const data = [
     "title": "Tesla Model S",
     "detail": "Sedán eléctrico con autonomía líder en su clase y tecnología avanzada.",
     "price": 79999,
-    "stock": 1,
+    "stock": 5,
     "img": "https://teslize.com/wp-content/uploads/2023/10/GUID-5543BA62-932F-46C5-B1EF-44707D4726B2-online-en-US.png"
   },
   {
@@ -73,6 +73,7 @@ const data = [
   }
 ];
 
+
 const autos = data.sort((a, b) => a.price - b.price).slice(0, 3);
 
 const superautos = data.sort((a, b) => b.id - a.id).slice(0, 3);
@@ -82,6 +83,62 @@ const mechaautos = data.filter(auto => !autos.includes(auto) && !superautos.incl
 console.log("Autos:", autos);
 console.log("Superautos:", superautos);
 console.log("Mechaautos:", mechaautos);
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function increaseItem() {
+  if (!productoSeleccionado) {
+    console.error("Producto no encontrado");
+    return;
+  }
+  const counterInput = document.getElementById("counter");
+  let currentCount = parseInt(counterInput.value);
+  if (currentCount < productoSeleccionado.stock) {
+    counterInput.value = currentCount + 1;
+  }
+}
+function decreaseItem() {
+  if (!productoSeleccionado) {
+    console.error("Producto no encontrado");
+    return;
+  }
+  const counterInput = document.getElementById("counter");
+  let currentCount = parseInt(counterInput.value);
+  if (currentCount > 1) {
+    counterInput.value = currentCount - 1;
+  }
+}
+function addCart() {
+  const counter = document.getElementById("counter");
+  const quantity = parseInt(counter.value);
+
+  const existingProduct = cart.find(item => item.id === productoSeleccionado.id);
+
+  if (existingProduct) {
+    existingProduct.quantity += quantity;
+  } else {
+    cart.push({
+      ...productoSeleccionado,
+      quantity: quantity
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  updateTotalQuantity();
+
+  alert("Producto agregado al carrito: " + quantity);
+}
+
+function updateTotalQuantity() {
+  const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
+  localStorage.setItem("quantity", totalQuantity);
+  const quantityTag = document.getElementById("quantity");
+  if (quantityTag) {
+    quantityTag.textContent = totalQuantity;
+  }
+}
+
 
 
 class Producto {
@@ -102,21 +159,21 @@ class Producto {
         <p>Precio: $${this.precio}</p>
         <p>Stock disponible: ${this.stock}</p>
         ${
-      localStorage.getItem("email")
-        ? `<span><div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-4">
-      <div class="input-group d-flex align-items-center justify-content-center">
-        <button class="btn btn-custom" type="button" id="btn-minus">-</button>
-        <input type="text" id="counter" class="counter-input mx-3" value="0" readonly>
-        <button class="btn btn-custom" type="button" id="btn-plus">+</button>
-      </div>
-    </div>
-  </div>
-</div>
-</span>` 
-: `<button class='btn btn-success'><a href='login.html' style='color: inherit; text-decoration: none; cursor: default;'>Iniciar sesión para comprar</a></button>`
-    }
+          localStorage.getItem("email")
+            ? `<span><div class="container mt-5">
+                <div class="row justify-content-center">
+                  <div class="col-md-4">
+                    <div class="input-group d-flex align-items-center justify-content-center">
+                      <button class="btn btn-custom" type="button" id="btn-minus" onclick="decreaseItem()">-</button>
+                      <input type="text" id="counter" class="counter-input mx-3" value="1" readonly>
+                      <button class="btn btn-custom" type="button" id="btn-plus" onclick="increaseItem()">+</button>
+                    </div><a href="#" class="btn-primary" onclick="addCart()">Comprar</a>
+                  </div>
+                </div>
+              </div>
+              </span>` 
+            : `<button class='btn btn-success'><a href='login.html' style='color: inherit; text-decoration: none; cursor: default;'>Iniciar sesión para comprar</a></button>`
+        }
       </div>
     `;
   }
@@ -125,7 +182,7 @@ class Producto {
 function mostrarProducto() {
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get('prod');
-  const productoSeleccionado = data.find(producto => producto.id == productId);
+  productoSeleccionado = data.find(producto => producto.id == productId);
 
   if (productoSeleccionado) {
     const productoObj = new Producto(
@@ -142,4 +199,4 @@ function mostrarProducto() {
   }
 }
 
-mostrarProducto()
+mostrarProducto();

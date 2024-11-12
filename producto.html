@@ -18,7 +18,7 @@
           text-align: center;
           border: none;
         }
-      </style>
+    </style>
 </head>
 <body>
     <header>
@@ -37,23 +37,24 @@
     </header>
 
     <main>
-
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="input-group d-flex align-items-center justify-content-center">
+                        <button class="btn btn-custom" id="btn-minus">-</button>
+                        <input type="text" id="counter" class="counter-input mx-3" value="1" readonly>
+                        <button class="btn btn-custom" id="btn-plus">+</button>
+                    </div>
+                    <button class="btn btn-primary mt-3" onclick="addItems()">Comprar</button>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script src="producto.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        document.getElementById('btn-minus').addEventListener('click', function() {
-          const counter = document.getElementById('counter');
-          counter.value = Math.max(0, parseInt(counter.value) - 1);
-        });
-      
-        document.getElementById('btn-plus').addEventListener('click', function() {
-          const counter = document.getElementById('counter');
-          counter.value = parseInt(counter.value) + 1;
-        });
-      </script>
+
 </body>
 </html>

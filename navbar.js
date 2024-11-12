@@ -4,6 +4,8 @@ const categorias = [
   { nombre: 'mechaautos' }
 ];
 
+const initialQuantity = localStorage.getItem("quantity") || 0;
+
 const menu = `
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -18,7 +20,14 @@ const menu = `
           `).join("")}
           <li class="nav-item">
             ${localStorage.getItem("email")
-              ? `<span class="nav-link">${localStorage.getItem("email")}</span><span class="nav-link" onclick="logout()">Cerrar sesión</span>`: `<a class="nav-link" href='./login.html'>Iniciar sesión</a>`}
+              ? `<span class="nav-link">${localStorage.getItem("email")}</span><span class="nav-link" onclick="logout()">Cerrar sesión</span>`
+              : `<a class="nav-link" href='./login.html'>Iniciar sesión</a>`}
+          </li>
+          <li class="nav-item">
+            <a href="cart.html" class="nav-link">
+              <img src="cart.png" alt="Carrito" style="width: 24px; height: 24px;">
+              <span id="quantity">${localStorage.getItem("quantity") || 0}</span>
+            </a>
           </li>
         </ul>
       </div>
@@ -32,3 +41,16 @@ function logout() {
   localStorage.clear();
   location.href = "./index.html";
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateCartQuantity();
+});
+
+function updateCartQuantity() {
+  const cartQuantity = localStorage.getItem("quantity") || 0;
+  document.getElementById("quantity").textContent = cartQuantity;
+}
+
+window.addEventListener("storage", () => {
+  updateCartQuantity();
+});

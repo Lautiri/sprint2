@@ -4,7 +4,7 @@ let data = [
     "title": "Ford Mustang GT",
     "detail": "Deportivo clásico con motor V8 de alto rendimiento y diseño icónico.",
     "price": 55000,
-    "stock": 1,
+    "stock": 4,
     "img": "https://www.pngitem.com/pimgs/m/340-3402493_ford-mustang-gt-5-0-2019-hd-png-download.png",
     "category": "Deportivo"
   },

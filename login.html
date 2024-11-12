@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
  <head>
-    <script src="isAuthRedirectHome.js"></script>
+  <script src="isAuthRedirectHome.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link
@@ -35,20 +35,6 @@
    </div>
    <button type="submit" class="btn btn-primary">Submit</button>
   </form>
-  <script>
-    const tarjet = {email: "laucharip@gmail.com", password: "vilgax"};
-    let form = document.querySelector("form");
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        if (tarjet.email === form.elements.email.value && tarjet.password === form.elements.password.value) {
-            localStorage.setItem("email", form.elements.email.value);
-            location.href = "./index.html";
-        } else {
-            alert("usuario o contraseña incorrecto");
-            form.elements.email.value = "";
-            form.elements.password.value = "";
-        }
-     });
-  </script>
+  <script src="login.js"></script>
  </body>
 </html>

@@ -1,5 +1,5 @@
 const data = [
-    { id: 1, title: "Ford Mustang GT", detail: "Deportivo clásico con motor V8 de alto rendimiento.", price: 55000, stock: 1, img: "https://www.pngitem.com/pimgs/m/340-3402493_ford-mustang-gt-5-0-2019-hd-png-download.png" },
+    { id: 1, title: "Ford Mustang GT", detail: "Deportivo clásico con motor V8 de alto rendimiento.", price: 55000, stock: 4, img: "https://www.pngitem.com/pimgs/m/340-3402493_ford-mustang-gt-5-0-2019-hd-png-download.png" },
     { id: 2, title: "Tesla Model S", detail: "Sedán eléctrico con autonomía líder.", price: 79999, stock: 1, img: "https://teslize.com/wp-content/uploads/2023/10/GUID-5543BA62-932F-46C5-B1EF-44707D4726B2-online-en-US.png" },
     { id: 3, title: "Chevrolet Camaro ZL1", detail: "Muscle car potente.", price: 63000, stock: 1, img: "https://i.pinimg.com/originals/36/7d/e6/367de641ffa6cd6c8ce806b0365ceea2.png" },
     { id: 4, title: "BMW M3", detail: "Berlina deportiva.", price: 72000, stock: 1, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfTlX4TYPRBEYoy3jsnH1ZBFmw91zRNQGQaw&s" },
