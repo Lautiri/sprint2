@@ -145,6 +145,10 @@ function resetear() {
   mostrarProductos(data); 
 }
 
-mostrarProductos(data);
-
+const promise = new Promise((resolve, reject) =>{
+  setTimeout(() => {
+    resolve("ok")
+  }, 3000)
+}) 
+promise.then(() => mostrarProductos(data))
 mostrarBotonesCategorias();

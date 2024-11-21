@@ -24,7 +24,7 @@ const menu = `
               : `<a class="nav-link" href='./login.html'>Iniciar sesión</a>`}
           </li>
           <li class="nav-item">
-            <a href="cart.html" class="nav-link">
+            <a href="cart.html" class="nav-link" onclick="handleCartClick(event)">
               <img src="cart.png" alt="Carrito" style="width: 24px; height: 24px;">
               <span id="quantity">${localStorage.getItem("quantity") || 0}</span>
             </a>
@@ -42,6 +42,14 @@ function logout() {
   location.href = "./index.html";
 }
 
+
+function handleCartClick(event) {
+  if (!localStorage.getItem("email")) {
+    event.preventDefault();
+    location.href = "./index.html"; 
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   updateCartQuantity();
 });
@@ -54,3 +62,4 @@ function updateCartQuantity() {
 window.addEventListener("storage", () => {
   updateCartQuantity();
 });
+
