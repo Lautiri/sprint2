@@ -20,7 +20,7 @@ const menu = `
           `).join("")}
           <li class="nav-item">
             ${localStorage.getItem("email")
-              ? `<span class="nav-link">${localStorage.getItem("email")}</span><span class="nav-link" onclick="logout()">Cerrar sesión</span>`
+              ? `<span class="nav-link">${localStorage.getItem("email")}</span><span class="nav-link" onclick="logout()">Cerrar sesion</span>`
               : `<a class="nav-link" href='./login.html'>Iniciar sesión</a>`}
           </li>
           <li class="nav-item">

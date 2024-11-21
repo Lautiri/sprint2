@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
           .then(response => response.json())
           .then(data => {
             Toastify({
-              text: `Buena compra ${data.user}, numero de orden es:${data.id}`,
+              text: `Buenisima compra ${data.user}, numero de orden es:${data.id}`,
               offset: {
                 y: 250,
               },
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Swal.fire({
               text: "Intenta nuevamente, error tecnico",
               confirmButtonColor: "#1d5dec",
-              confirmButtonText: "Confirm"
+              confirmButtonText: "Confirmar"
             });
           });
         }

@@ -172,7 +172,7 @@ class Producto {
                 </div>
               </div>
               </span>` 
-            : `<button class='btn btn-success'><a href='login.html' style='color: inherit; text-decoration: none; cursor: default;'>Iniciar sesión para comprar</a></button>`
+            : `<button class='btn btn-success'><a href='login.html' style='color: inherit; text-decoration: none; cursor: default;'>Iniciar sesion para comprar</a></button>`
         }
       </div>
     `;

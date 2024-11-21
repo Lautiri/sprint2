@@ -15,7 +15,7 @@ function handleSubmitLogin(event) {
 
     window.location.href = "./index.html";
   } else {
-    alert("Usuario o contraseña incorrecto");
+    alert("Usuario o contraseña incorrecto, revisar");
     event.target.elements.email.value = "";
     event.target.elements.password.value = "";
   }
