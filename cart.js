@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     renderCart();
+    const checkoutButton = document.querySelector("#btn-checkout");
+    checkoutButton.addEventListener("click", finishOrder);
   });
   
   function renderCart() {
@@ -13,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   
     cartContainer.innerHTML = "";
   
-    // Iterar sobre los productos en el carrito y agregar cada uno al HTML
     cart.forEach((item) => {
       const productHTML = `
         <div class="d-flex align-items-start border-bottom pb-3">
@@ -49,14 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
       cartContainer.innerHTML += productHTML;
     });
   
-    // Actualizar el total del carrito
     updateTotal(cart);
   }
   
-  // Función para actualizar el total
   function updateTotal(cart) {
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const totalElement = document.querySelector(".card-body .table tbody"); // Se asume que tienes un contenedor de tabla para el total
+    const totalElement = document.querySelector(".card-body .table tbody");
     totalElement.innerHTML = `
       <tr class="bg-light">
         <th>Total :</th>
@@ -67,26 +66,72 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
   
-  // Función para eliminar producto del carrito
   function removeFromCart(productId) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     
-    // Filtrar el producto con el id especificado
     cart = cart.filter((item) => item.id !== productId);
     
-    // Actualizar el carrito en localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
-  
-    // Actualizar la vista del carrito
-    renderCart(); // Vuelve a renderizar el carrito actualizado
+    renderCart();
   }
   
-  // Función para vaciar el carrito
   function clearCart() {
-    // Limpiar el carrito en localStorage
     localStorage.setItem("cart", JSON.stringify([]));
+    renderCart();
+  }
   
-    // Actualizar la vista del carrito
-    renderCart(); // Vuelve a renderizar el carrito vacío
+  function finishOrder() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const quantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+  
+    if (quantity === 0) {
+      Toastify({
+        text: "No hay productos en el carrito",
+        offset: {
+          y: 70 
+        },
+      }).showToast();
+    } else {
+      Swal.fire({
+        text: "Quieres añadir al carrito",
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+        showCancelButton: true,
+        showCloseButton: true,
+        confirmButtonColor: "green",
+        cancelButtonColor: "red"
+      }).then(result => {
+        if (result.isConfirmed) {
+          const datos = {
+            user: localStorage.getItem("email").split("@")[0],
+            items: cart,
+          };
+  
+          fetch("https://6736a17baafa2ef222310933.mockapi.io/orders", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datos),
+          })
+          .then(response => response.json())
+          .then(data => {
+            Toastify({
+              text: `Buena compra ${data.user}, numero de orden es:${data.id}`,
+              offset: {
+                y: 250,
+              },
+            }).showToast();
+  
+            clearCart();
+          })
+          .catch(() => {
+            Swal.fire({
+              text: "Intenta nuevamente, error tecnico",
+              confirmButtonColor: "#1d5dec",
+              confirmButtonText: "Confirm"
+            });
+          });
+        }
+      });
+    }
   }
   

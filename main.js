@@ -147,7 +147,7 @@ function resetear() {
 
 const promise = new Promise((resolve, reject) =>{
   setTimeout(() => {
-    resolve("ok")
+    resolve("Dale que vos podes")
   }, 3000)
 }) 
 promise.then(() => mostrarProductos(data))
